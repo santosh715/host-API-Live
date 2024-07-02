@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UNO</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Slab:ital,wght@0,100..700;1,100..700&display=swap"
+    rel="stylesheet">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+
+
+
+
+  <section class="  ">
+
+    <!-- <div class="container text-center bg-danger"> -->
+    <div class="row align-items-center main-div-1">
+      <div class="card1">
+
+        <div class="card-front">
+          
+          
+          
+          <div class="card-wrap">
+            <button class="first-btn-1">Create</button>
+          </div>
+          
+          
+
+
+          
+        </div>
+
+        <div class="card-back">
+          <div class="card-wrap">
+            <div class="my-div">
+              <label for="box1" class="enter-code">Host Name:</label>
+              <input type="text" class="player-name" id="hostName">
+            </div>
+          </div>
+          
+          <div class="card-wrap">
+            <div class="my-div">
+              <label for="" class="label">Select Players</label>
+              <select name="Players" id="Players">
+                <option value="1 Player">1 Player</option>
+                <option value="2 Player">2 Player</option>
+                <option value="3 Player">3 Player</option>
+                <option value="4 Player">4 player</option>
+                <option value="5 Player">5 player</option>
+                <option value="6 Player">6 player</option>
+                <option value="7 Player">7 player</option>
+                <option value="8 Player">8 player</option>
+                <option value="9 Player">9 player</option>
+                <option value="10 Player">10 player</option>
+              </select>
+            </div>
+          </div>
+          <div class="card-wrap">
+            <button class="first-btn" id="start">START</button>
+          </div>
+        </div>
+      </div>
+
+
+
+      <div class="card2">
+        <div class="card-front">
+          
+          
+          
+          <div class="card-wrap">
+            <button class="first-btn-1">Join</button>
+          </div>
+          
+          
+
+
+          
+        </div>
+        
+
+        
+
+
+        <div class="card-back">
+          <div class="card-wrap">
+            <div class="my-div">
+              <label for="box1" class="enter-code">Player Name:</label>
+                        <input type="text" class="player-name">
+            </div>
+          </div>
+          
+          <div class="card-wrap">
+            <div class="my-div">
+              <label for="box1" class="enter-code">Enter Code:</label>
+                        <br>
+                        <input type="text" class="code-input" id="box1" maxlength="1"
+                            oninput="validateAndMove(this, 'box2','')">
+                        <input type="text" class="code-input" id="box2" maxlength="1"
+                            oninput="validateAndMove(this, 'box3','box1')">
+                        <input type="text" class="code-input" id="box3" maxlength="1"
+                            oninput="validateAndMove(this, 'box4','box2')">
+                        <input type="text" class="code-input" id="box4" maxlength="1"
+                            oninput="validateAndMove(this, 'box5','box3')">
+                        <input type="text" class="code-input" id="box5" maxlength="1"
+                            oninput="validateAndMove(this, 'box6','box4')">
+                        <input type="text" class="code-input" id="box6" maxlength="1"
+                            oninput="validateAndMove(this, 'box7','box5')">
+                        <input type="text" class="code-input" id="box7" maxlength="1"
+                            oninput="validateAndMove(this, 'box8','box6')">
+                        <input type="text" class="code-input" id="box8" maxlength="1"
+                            oninput="validateAndMove(this, '','box7')">
+            </div>
+          </div>
+          <div class="card-wrap">
+            <button class="first-btn">Join</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- </div> -->
+
+  </section>
+  <script>
+    $(document).ready(function () {
+        function flipCard(cardToFlip, otherCard) {
+            otherCard.removeClass('flipped');
+            cardToFlip.addClass('flipped');
+        }
+
+        $('.card1').click(function (e) {
+            e.preventDefault();
+            flipCard($(this), $('.card2'));
+        });
+
+        $('.card2').click(function (e) {
+            e.preventDefault();
+            flipCard($(this), $('.card1'));
+        });
+    });
+</script>
+
+
+<script>
+  function validateAndMove(current, nextFieldId, prevFieldId) {
+      const letterPattern = /^[a-zA-Z]$/;
+
+      // If input becomes empty, move to the previous input field
+      if (current.value === '' && prevFieldId) {
+          document.getElementById(prevFieldId).focus();
+          return;
+      }
+
+      // Validate the current input
+      if (!letterPattern.test(current.value)) {
+          current.value = '';
+          return;
+      }
+
+      // Move to the next input field if the current one is filled
+      if (current.value.length === current.maxLength && nextFieldId) {
+          document.getElementById(nextFieldId).focus();
+      }
+  }
+</script>
+
+<script>
+  document.getElementById('Players').addEventListener('change', function() {
+      const numberOfPlayers = parseInt(this.value);
+      const cardsContainer = document.getElementById('cards-container');
+      cardsContainer.innerHTML = ''; // Clear any existing cards
+
+      for (let i = 1; i <= numberOfPlayers; i++) {
+          const card = document.createElement('div');
+          card.className = 'card';
+
+          const userIcon = document.createElement('img');
+          userIcon.src = 'https://via.placeholder.com/40'; // Placeholder user icon
+          userIcon.alt = 'User Icon';
+
+          const playerName = document.createElement('p');
+          playerName.textContent = `Player ${i}`;
+
+          card.appendChild(userIcon);
+          card.appendChild(playerName);
+          cardsContainer.appendChild(card);
+      }
+  });
+</script>
+
+<script src="./script.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+
+
+    <script src="../backend/index.js"></script>
+</body>
+
+</html>
